@@ -23,8 +23,9 @@ gulp.task('mjml-to-html', function () {
 
 gulp.task('update-json', function () {
     return gulp.src('./template.json')
-        .pipe(jsonEditor({
-            'html': htmlContents
+        .pipe(jsonEditor(function(json) {
+            json.Template.HtmlPart = htmlContents;
+            return json;
         }))
         .pipe(gulp.dest('./'))
 });
